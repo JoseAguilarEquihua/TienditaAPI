@@ -17,6 +17,8 @@ namespace TienditaAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
+            this.Carrito = new HashSet<Carrito>();
+            this.Inventario = new HashSet<Inventario>();
             this.Pedidos = new HashSet<Pedidos>();
         }
     
@@ -25,10 +27,11 @@ namespace TienditaAPI.Models
         public double Costo { get; set; }
         public int Cantidad { get; set; }
     
-        public virtual Inventario Inventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carrito> Carrito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedidos> Pedidos { get; set; }
-        public virtual Producto Producto11 { get; set; }
-        public virtual Producto Producto2 { get; set; }
     }
 }

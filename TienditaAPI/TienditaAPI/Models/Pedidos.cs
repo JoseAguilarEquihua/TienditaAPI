@@ -18,8 +18,9 @@ namespace TienditaAPI.Models
         public string Correo { get; set; }
         public int Cantidad { get; set; }
         public double Total { get; set; }
+        public int IdPedido { get; set; }
     
-        public virtual Producto Producto { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }

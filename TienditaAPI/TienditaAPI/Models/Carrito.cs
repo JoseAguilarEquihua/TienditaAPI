@@ -10,13 +10,18 @@
 namespace TienditaAPI.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class Carrito
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public string Correo { get; set; }
+        public int IdProducto { get; set; }
+        public int Cantidad { get; set; }
+        public double Costo { get; set; }
+        public bool Estado { get; set; }
+        public int IdCarrito { get; set; }
+    
+        public virtual Producto Producto { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

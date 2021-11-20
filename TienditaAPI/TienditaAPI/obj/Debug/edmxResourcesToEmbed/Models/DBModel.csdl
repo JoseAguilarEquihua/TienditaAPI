@@ -1,12 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TienditaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carrito">
+    <Key>
+      <PropertyRef Name="IdCarrito" />
+    </Key>
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Costo" Type="Double" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <Property Name="IdCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Carrito_Producto" FromRole="Carrito" ToRole="Producto" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Carrito_Usuario" FromRole="Carrito" ToRole="Usuario" />
+  </EntityType>
   <EntityType Name="Inventario">
     <Key>
-      <PropertyRef Name="IdProducto" />
+      <PropertyRef Name="IdInventario" />
     </Key>
-    <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Producto" Relationship="Self.FK__Inventari__IdPro__36B12243" FromRole="Inventario" ToRole="Producto" />
+    <Property Name="IdInventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Inventario_Producto" FromRole="Inventario" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="IdPedido" />
+    </Key>
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Pedidos__Correo__2A4B4B5E" FromRole="Pedidos" ToRole="Usuario" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK__Pedidos__IdProdu__2B3F6F97" FromRole="Pedidos" ToRole="Producto" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -16,10 +42,9 @@
     <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Costo" Type="Double" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__IdPro__36B12243" FromRole="Producto" ToRole="Inventario" />
-    <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IdProdu__38996AB5" FromRole="Producto" ToRole="Pedidos" />
-    <NavigationProperty Name="Producto11" Relationship="Self.FK__Producto__IdProd__35BCFE0A" FromRole="Producto" ToRole="Producto1" />
-    <NavigationProperty Name="Producto2" Relationship="Self.FK__Producto__IdProd__35BCFE0A" FromRole="Producto1" ToRole="Producto" />
+    <NavigationProperty Name="Carrito" Relationship="Self.FK_Carrito_Producto" FromRole="Producto" ToRole="Carrito" />
+    <NavigationProperty Name="Inventario" Relationship="Self.FK_Inventario_Producto" FromRole="Producto" ToRole="Inventario" />
+    <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IdProdu__2B3F6F97" FromRole="Producto" ToRole="Pedidos" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -41,25 +66,37 @@
     <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Correo__37A5467C" FromRole="Usuario" ToRole="Pedidos" />
+    <Property Name="TipoUsuario" Type="Boolean" />
+    <NavigationProperty Name="Carrito" Relationship="Self.FK_Carrito_Usuario" FromRole="Usuario" ToRole="Carrito" />
+    <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Correo__2A4B4B5E" FromRole="Usuario" ToRole="Pedidos" />
   </EntityType>
-  <EntityType Name="Pedidos">
-    <Key>
-      <PropertyRef Name="IdProducto" />
-      <PropertyRef Name="Correo" />
-      <PropertyRef Name="Cantidad" />
-      <PropertyRef Name="Total" />
-    </Key>
-    <Property Name="IdProducto" Type="Int32" Nullable="false" />
-    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <Property Name="Total" Type="Double" Nullable="false" />
-    <NavigationProperty Name="Producto" Relationship="Self.FK__Pedidos__IdProdu__38996AB5" FromRole="Pedidos" ToRole="Producto" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Pedidos__Correo__37A5467C" FromRole="Pedidos" ToRole="Usuario" />
-  </EntityType>
-  <Association Name="FK__Inventari__IdPro__36B12243">
+  <Association Name="FK_Carrito_Producto">
     <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-    <End Role="Inventario" Type="Self.Inventario" Multiplicity="0..1" />
+    <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="Carrito">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrito_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Correo" />
+      </Principal>
+      <Dependent Role="Carrito">
+        <PropertyRef Name="Correo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventario_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Producto">
         <PropertyRef Name="IdProducto" />
@@ -69,31 +106,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Pedidos__IdProdu__38996AB5">
-    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Producto">
-        <PropertyRef Name="IdProducto" />
-      </Principal>
-      <Dependent Role="Pedidos">
-        <PropertyRef Name="IdProducto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Producto__IdProd__35BCFE0A">
-    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-    <End Role="Producto1" Type="Self.Producto" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Producto">
-        <PropertyRef Name="IdProducto" />
-      </Principal>
-      <Dependent Role="Producto1">
-        <PropertyRef Name="IdProducto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Pedidos__Correo__37A5467C">
+  <Association Name="FK__Pedidos__Correo__2A4B4B5E">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -105,68 +118,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Pedidos__IdProdu__2B3F6F97">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TienditaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carrito" EntityType="Self.Carrito" />
     <EntitySet Name="Inventario" EntityType="Self.Inventario" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
     <EntitySet Name="Producto" EntityType="Self.Producto" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
-    <AssociationSet Name="FK__Inventari__IdPro__36B12243" Association="Self.FK__Inventari__IdPro__36B12243">
+    <AssociationSet Name="FK_Carrito_Producto" Association="Self.FK_Carrito_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Carrito" EntitySet="Carrito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrito_Usuario" Association="Self.FK_Carrito_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Carrito" EntitySet="Carrito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventario_Producto" Association="Self.FK_Inventario_Producto">
       <End Role="Producto" EntitySet="Producto" />
       <End Role="Inventario" EntitySet="Inventario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Pedidos__IdProdu__38996AB5" Association="Self.FK__Pedidos__IdProdu__38996AB5">
-      <End Role="Producto" EntitySet="Producto" />
-      <End Role="Pedidos" EntitySet="Pedidos" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Producto__IdProd__35BCFE0A" Association="Self.FK__Producto__IdProd__35BCFE0A">
-      <End Role="Producto" EntitySet="Producto" />
-      <End Role="Producto1" EntitySet="Producto" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Pedidos__Correo__37A5467C" Association="Self.FK__Pedidos__Correo__37A5467C">
+    <AssociationSet Name="FK__Pedidos__Correo__2A4B4B5E" Association="Self.FK__Pedidos__Correo__2A4B4B5E">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Pedidos" EntitySet="Pedidos" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TienditaModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TienditaModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
+    <AssociationSet Name="FK__Pedidos__IdProdu__2B3F6F97" Association="Self.FK__Pedidos__IdProdu__2B3F6F97">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

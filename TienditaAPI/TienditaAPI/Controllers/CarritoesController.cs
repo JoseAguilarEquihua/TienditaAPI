@@ -12,44 +12,44 @@ using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
 {
-    public class PedidosController : ApiController
+    public class CarritoesController : ApiController
     {
         private TienditaEntities db = new TienditaEntities();
 
-        // GET: api/Pedidos
-        public IQueryable<Pedidos> GetPedidos()
+        // GET: api/Carritoes
+        public IQueryable<Carrito> GetCarrito()
         {
-            return db.Pedidos;
+            return db.Carrito;
         }
 
-        // GET: api/Pedidos/5
-        [ResponseType(typeof(Pedidos))]
-        public IHttpActionResult GetPedidos(int id)
+        // GET: api/Carritoes/5
+        [ResponseType(typeof(Carrito))]
+        public IHttpActionResult GetCarrito(int id)
         {
-            Pedidos pedidos = db.Pedidos.Find(id);
-            if (pedidos == null)
+            Carrito carrito = db.Carrito.Find(id);
+            if (carrito == null)
             {
                 return NotFound();
             }
 
-            return Ok(pedidos);
+            return Ok(carrito);
         }
 
-        // PUT: api/Pedidos/5
+        // PUT: api/Carritoes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPedidos(int id, Pedidos pedidos)
+        public IHttpActionResult PutCarrito(int id, Carrito carrito)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pedidos.IdPedido)
+            if (id != carrito.IdCarrito)
             {
                 return BadRequest();
             }
 
-            db.Entry(pedidos).State = EntityState.Modified;
+            db.Entry(carrito).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace TienditaAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PedidosExists(id))
+                if (!CarritoExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace TienditaAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Pedidos
-        [ResponseType(typeof(Pedidos))]
-        public IHttpActionResult PostPedidos(Pedidos pedidos)
+        // POST: api/Carritoes
+        [ResponseType(typeof(Carrito))]
+        public IHttpActionResult PostCarrito(Carrito carrito)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Pedidos.Add(pedidos);
+            db.Carrito.Add(carrito);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = pedidos.IdPedido }, pedidos);
+            return CreatedAtRoute("DefaultApi", new { id = carrito.IdCarrito }, carrito);
         }
 
-        // DELETE: api/Pedidos/5
-        [ResponseType(typeof(Pedidos))]
-        public IHttpActionResult DeletePedidos(int id)
+        // DELETE: api/Carritoes/5
+        [ResponseType(typeof(Carrito))]
+        public IHttpActionResult DeleteCarrito(int id)
         {
-            Pedidos pedidos = db.Pedidos.Find(id);
-            if (pedidos == null)
+            Carrito carrito = db.Carrito.Find(id);
+            if (carrito == null)
             {
                 return NotFound();
             }
 
-            db.Pedidos.Remove(pedidos);
+            db.Carrito.Remove(carrito);
             db.SaveChanges();
 
-            return Ok(pedidos);
+            return Ok(carrito);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace TienditaAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PedidosExists(int id)
+        private bool CarritoExists(int id)
         {
-            return db.Pedidos.Count(e => e.IdPedido == id) > 0;
+            return db.Carrito.Count(e => e.IdCarrito == id) > 0;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace TienditaAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != inventario.IdProducto)
+            if (id != inventario.IdInventario)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace TienditaAPI.Controllers
             db.Inventario.Add(inventario);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = inventario.IdProducto }, inventario);
+            return CreatedAtRoute("DefaultApi", new { id = inventario.IdInventario }, inventario);
         }
 
         // DELETE: api/Inventarios/5
@@ -112,7 +112,7 @@ namespace TienditaAPI.Controllers
 
         private bool InventarioExists(int id)
         {
-            return db.Inventario.Count(e => e.IdProducto == id) > 0;
+            return db.Inventario.Count(e => e.IdInventario == id) > 0;
         }
     }
 }

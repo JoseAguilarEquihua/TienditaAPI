@@ -16,6 +16,7 @@ namespace TienditaAPI.Models
     {
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
+        public int IdInventario { get; set; }
     
         public virtual Producto Producto { get; set; }
     }
