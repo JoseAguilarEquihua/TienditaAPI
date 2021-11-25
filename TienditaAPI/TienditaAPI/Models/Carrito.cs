@@ -20,8 +20,5 @@ namespace TienditaAPI.Models
         public double Costo { get; set; }
         public bool Estado { get; set; }
         public int IdCarrito { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

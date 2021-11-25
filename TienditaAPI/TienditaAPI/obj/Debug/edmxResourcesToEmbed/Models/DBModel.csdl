@@ -46,16 +46,6 @@
     <NavigationProperty Name="Inventario" Relationship="Self.FK_Inventario_Producto" FromRole="Producto" ToRole="Inventario" />
     <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IdProdu__2B3F6F97" FromRole="Producto" ToRole="Pedidos" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="Correo" />
@@ -135,7 +125,6 @@
     <EntitySet Name="Inventario" EntityType="Self.Inventario" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
     <EntitySet Name="Producto" EntityType="Self.Producto" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <AssociationSet Name="FK_Carrito_Producto" Association="Self.FK_Carrito_Producto">
       <End Role="Producto" EntitySet="Producto" />
