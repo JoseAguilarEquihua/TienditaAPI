@@ -16,8 +16,8 @@ namespace TienditaAPI
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}/{password}",
+                defaults: new { id = RouteParameter.Optional, password = RouteParameter.Optional }
             );
 
             //Evito las referencias circulares al trabajar con Entity FrameWork         

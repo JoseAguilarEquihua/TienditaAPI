@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Mvc;
 using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
@@ -35,7 +36,54 @@ namespace TienditaAPI.Controllers
             return Ok(usuario);
         }
 
-        // PUT: api/Usuarios/5
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult Index(string correo, string contrasenia)
+        {
+            try
+            {
+                using (Models.TienditaEntities db = new Models.TienditaEntities())
+                {
+                    var isUser = (from t in db.Usuario
+                                  where t.Correo == correo.Trim() && t.Contrasenia == contrasenia.Trim()
+                                  select t).FirstOrDefault();
+                    if (isUser == null)
+                    {                       
+                        return NotFound();
+                    }
+                    
+                }
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+        }
+
+        // GET: api/Usuarios/correo/password
+        //POST api/PreviewLCAPI
+        //[Route("")]
+        //[HttpPost]
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/Usuarios/Login")]
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult Login(AuthModel login)
+        {
+            bool usuario = UsuarioLogin(login.Correo, login.Contrasenia);
+            if (usuario)
+            {                
+                return Ok(db.Usuario.Find(login.Correo));
+            }
+            else
+            {
+                return NotFound();
+            }
+            
+
+        }
+
+        // PUT: api/Usuarios/5        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuario(string id, Usuario usuario)
         {
@@ -128,6 +176,11 @@ namespace TienditaAPI.Controllers
         private bool UsuarioExists(string id)
         {
             return db.Usuario.Count(e => e.Correo == id) > 0;
+        }
+
+        private bool UsuarioLogin(string id, string password)
+        {
+            return  db.Usuario.Count(e => e.Correo == id && e.Contrasenia == password) > 0;            
         }
     }
 }
