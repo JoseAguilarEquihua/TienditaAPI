@@ -8,22 +8,40 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Mvc;
 using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
 {
-    public class UsuariosController : ApiController
+    public class UsuarioController : ApiController
     {
-        private TienditaEntities db = new TienditaEntities();
+        private TienditaEntities1 db = new TienditaEntities1();
 
-        // GET: api/Usuarios
+        // GET: api/Usuario
         public IQueryable<Usuario> GetUsuario()
         {
             return db.Usuario;
         }
 
-        // GET: api/Usuarios/5
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/Usuarios/Login")]
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult Login(AuthModel login)
+        {
+            bool usuario = UsuarioLogin(login.Correo, login.Contrasenia);
+            if (usuario)
+            {
+                Usuario usuarioResponse = db.Usuario.Find(login.Correo);
+
+                return Ok(usuarioResponse);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
+        // GET: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetUsuario(string id)
         {
@@ -36,54 +54,7 @@ namespace TienditaAPI.Controllers
             return Ok(usuario);
         }
 
-        [System.Web.Http.HttpPost]
-        public IHttpActionResult Index(string correo, string contrasenia)
-        {
-            try
-            {
-                using (Models.TienditaEntities db = new Models.TienditaEntities())
-                {
-                    var isUser = (from t in db.Usuario
-                                  where t.Correo == correo.Trim() && t.Contrasenia == contrasenia.Trim()
-                                  select t).FirstOrDefault();
-                    if (isUser == null)
-                    {                       
-                        return NotFound();
-                    }
-                    
-                }
-                return Ok();
-
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-        }
-
-        // GET: api/Usuarios/correo/password
-        //POST api/PreviewLCAPI
-        //[Route("")]
-        //[HttpPost]
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/Usuarios/Login")]
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult Login(AuthModel login)
-        {
-            bool usuario = UsuarioLogin(login.Correo, login.Contrasenia);
-            if (usuario)
-            {                
-                return Ok(db.Usuario.Find(login.Correo));
-            }
-            else
-            {
-                return NotFound();
-            }
-            
-
-        }
-
-        // PUT: api/Usuarios/5        
+        // PUT: api/Usuario/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuario(string id, Usuario usuario)
         {
@@ -118,7 +89,7 @@ namespace TienditaAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Usuarios
+        // POST: api/Usuario
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult PostUsuario(Usuario usuario)
         {
@@ -148,7 +119,7 @@ namespace TienditaAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = usuario.Correo }, usuario);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult DeleteUsuario(string id)
         {
@@ -180,7 +151,7 @@ namespace TienditaAPI.Controllers
 
         private bool UsuarioLogin(string id, string password)
         {
-            return  db.Usuario.Count(e => e.Correo == id && e.Contrasenia == password) > 0;            
+            return db.Usuario.Count(e => e.Correo == id && e.Contrasenia == password) > 0;
         }
     }
 }

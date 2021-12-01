@@ -14,7 +14,7 @@ namespace TienditaAPI.Controllers
 {
     public class CarritoController : ApiController
     {
-        private TienditaEntities db = new TienditaEntities();
+        private TienditaEntities1 db = new TienditaEntities1();
 
         // GET: api/Carrito
         public IQueryable<Carrito> GetCarrito()

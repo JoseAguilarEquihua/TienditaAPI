@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="da9feff8bf1749798923acfaa2360610" Name="Diagram1">
+      <Diagram DiagramId="55b3332debbb49e88cbaaf98abaec6d0" Name="Diagram1">
         <EntityTypeShape EntityType="TienditaModel.Carrito" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.Inventario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.Pedidos" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.Producto" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.Usuario" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.DetalleCarrito" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.DetallePedido" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.Pedido" Width="1.5" PointX="2.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.Producto" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.Usuario" Width="1.5" PointX="4.75" PointY="2.625" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

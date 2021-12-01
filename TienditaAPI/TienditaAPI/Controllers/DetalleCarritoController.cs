@@ -12,44 +12,44 @@ using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
 {
-    public class ProductoController : ApiController
+    public class DetalleCarritoController : ApiController
     {
         private TienditaEntities1 db = new TienditaEntities1();
 
-        // GET: api/Producto
-        public IQueryable<Producto> GetProducto()
+        // GET: api/DetalleCarrito
+        public IQueryable<DetalleCarrito> GetDetalleCarrito()
         {
-            return db.Producto;
+            return db.DetalleCarrito;
         }
 
-        // GET: api/Producto/5
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult GetProducto(int id)
+        // GET: api/DetalleCarrito/5
+        [ResponseType(typeof(DetalleCarrito))]
+        public IHttpActionResult GetDetalleCarrito(int id)
         {
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            DetalleCarrito detalleCarrito = db.DetalleCarrito.Find(id);
+            if (detalleCarrito == null)
             {
                 return NotFound();
             }
 
-            return Ok(producto);
+            return Ok(detalleCarrito);
         }
 
-        // PUT: api/Producto/5
+        // PUT: api/DetalleCarrito/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProducto(int id, Producto producto)
+        public IHttpActionResult PutDetalleCarrito(int id, DetalleCarrito detalleCarrito)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != producto.IdProducto)
+            if (id != detalleCarrito.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(producto).State = EntityState.Modified;
+            db.Entry(detalleCarrito).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace TienditaAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!DetalleCarritoExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace TienditaAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Producto
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult PostProducto(Producto producto)
+        // POST: api/DetalleCarrito
+        [ResponseType(typeof(DetalleCarrito))]
+        public IHttpActionResult PostDetalleCarrito(DetalleCarrito detalleCarrito)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Producto.Add(producto);
+            db.DetalleCarrito.Add(detalleCarrito);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = producto.IdProducto }, producto);
+            return CreatedAtRoute("DefaultApi", new { id = detalleCarrito.Id }, detalleCarrito);
         }
 
-        // DELETE: api/Producto/5
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult DeleteProducto(int id)
+        // DELETE: api/DetalleCarrito/5
+        [ResponseType(typeof(DetalleCarrito))]
+        public IHttpActionResult DeleteDetalleCarrito(int id)
         {
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            DetalleCarrito detalleCarrito = db.DetalleCarrito.Find(id);
+            if (detalleCarrito == null)
             {
                 return NotFound();
             }
 
-            db.Producto.Remove(producto);
+            db.DetalleCarrito.Remove(detalleCarrito);
             db.SaveChanges();
 
-            return Ok(producto);
+            return Ok(detalleCarrito);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace TienditaAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductoExists(int id)
+        private bool DetalleCarritoExists(int id)
         {
-            return db.Producto.Count(e => e.IdProducto == id) > 0;
+            return db.DetalleCarrito.Count(e => e.Id == id) > 0;
         }
     }
 }

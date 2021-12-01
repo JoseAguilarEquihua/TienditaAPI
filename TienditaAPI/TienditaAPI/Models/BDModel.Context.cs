@@ -13,10 +13,10 @@ namespace TienditaAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TienditaEntities : DbContext
+    public partial class TienditaEntities1 : DbContext
     {
-        public TienditaEntities()
-            : base("name=TienditaEntities")
+        public TienditaEntities1()
+            : base("name=TienditaEntities1")
         {
         }
     
@@ -26,10 +26,10 @@ namespace TienditaAPI.Models
         }
     
         public virtual DbSet<Carrito> Carrito { get; set; }
-        public virtual DbSet<Inventario> Inventario { get; set; }
-        public virtual DbSet<Pedidos> Pedidos { get; set; }
+        public virtual DbSet<DetalleCarrito> DetalleCarrito { get; set; }
+        public virtual DbSet<DetallePedido> DetallePedido { get; set; }
+        public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

@@ -126,10 +126,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
-    <Compile Include="Controllers\InventariosController.cs" />
-    <Compile Include="Controllers\PedidosController.cs" />
+    <Compile Include="Controllers\DetalleCarritoController.cs" />
+    <Compile Include="Controllers\DetallePedidoController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -152,16 +153,16 @@
     <Compile Include="Models\Carrito.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Inventario.cs">
+    <Compile Include="Models\DetalleCarrito.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pedidos.cs">
+    <Compile Include="Models\DetallePedido.cs">
+      <DependentUpon>BDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pedido.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Producto.cs">
-      <DependentUpon>BDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">

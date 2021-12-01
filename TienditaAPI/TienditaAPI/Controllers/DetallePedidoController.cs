@@ -12,44 +12,44 @@ using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
 {
-    public class ProductoController : ApiController
+    public class DetallePedidoController : ApiController
     {
         private TienditaEntities1 db = new TienditaEntities1();
 
-        // GET: api/Producto
-        public IQueryable<Producto> GetProducto()
+        // GET: api/DetallePedido
+        public IQueryable<DetallePedido> GetDetallePedido()
         {
-            return db.Producto;
+            return db.DetallePedido;
         }
 
-        // GET: api/Producto/5
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult GetProducto(int id)
+        // GET: api/DetallePedido/5
+        [ResponseType(typeof(DetallePedido))]
+        public IHttpActionResult GetDetallePedido(int id)
         {
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            DetallePedido detallePedido = db.DetallePedido.Find(id);
+            if (detallePedido == null)
             {
                 return NotFound();
             }
 
-            return Ok(producto);
+            return Ok(detallePedido);
         }
 
-        // PUT: api/Producto/5
+        // PUT: api/DetallePedido/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProducto(int id, Producto producto)
+        public IHttpActionResult PutDetallePedido(int id, DetallePedido detallePedido)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != producto.IdProducto)
+            if (id != detallePedido.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(producto).State = EntityState.Modified;
+            db.Entry(detallePedido).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace TienditaAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!DetallePedidoExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace TienditaAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Producto
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult PostProducto(Producto producto)
+        // POST: api/DetallePedido
+        [ResponseType(typeof(DetallePedido))]
+        public IHttpActionResult PostDetallePedido(DetallePedido detallePedido)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Producto.Add(producto);
+            db.DetallePedido.Add(detallePedido);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = producto.IdProducto }, producto);
+            return CreatedAtRoute("DefaultApi", new { id = detallePedido.Id }, detallePedido);
         }
 
-        // DELETE: api/Producto/5
-        [ResponseType(typeof(Producto))]
-        public IHttpActionResult DeleteProducto(int id)
+        // DELETE: api/DetallePedido/5
+        [ResponseType(typeof(DetallePedido))]
+        public IHttpActionResult DeleteDetallePedido(int id)
         {
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            DetallePedido detallePedido = db.DetallePedido.Find(id);
+            if (detallePedido == null)
             {
                 return NotFound();
             }
 
-            db.Producto.Remove(producto);
+            db.DetallePedido.Remove(detallePedido);
             db.SaveChanges();
 
-            return Ok(producto);
+            return Ok(detallePedido);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace TienditaAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductoExists(int id)
+        private bool DetallePedidoExists(int id)
         {
-            return db.Producto.Count(e => e.IdProducto == id) > 0;
+            return db.DetallePedido.Count(e => e.Id == id) > 0;
         }
     }
 }

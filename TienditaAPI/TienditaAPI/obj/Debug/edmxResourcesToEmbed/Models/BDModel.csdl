@@ -4,30 +4,36 @@
     <Key>
       <PropertyRef Name="IdCarrito" />
     </Key>
-    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IdProducto" Type="Int32" Nullable="false" />
-    <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <Property Name="Costo" Type="Double" Nullable="false" />
-    <Property Name="Estado" Type="Boolean" Nullable="false" />
     <Property Name="IdCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityType Name="Inventario">
+  <EntityType Name="DetalleCarrito">
     <Key>
-      <PropertyRef Name="IdInventario" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCarrito" Type="Int32" Nullable="false" />
     <Property Name="IdProducto" Type="Int32" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <Property Name="IdInventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Detalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Pedidos">
+  <EntityType Name="DetallePedido">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPedido" Type="Int32" Nullable="false" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Detalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Pedido">
     <Key>
       <PropertyRef Name="IdPedido" />
     </Key>
-    <Property Name="IdProducto" Type="Int32" Nullable="false" />
-    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Cantidad" Type="Int32" Nullable="false" />
-    <Property Name="Total" Type="Double" Nullable="false" />
     <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Total" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -36,16 +42,6 @@
     <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Costo" Type="Double" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -59,12 +55,12 @@
     <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="TipoUsuario" Type="Boolean" />
   </EntityType>
-  <EntityContainer Name="TienditaEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TienditaEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Carrito" EntityType="Self.Carrito" />
-    <EntitySet Name="Inventario" EntityType="Self.Inventario" />
-    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
+    <EntitySet Name="DetalleCarrito" EntityType="Self.DetalleCarrito" />
+    <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
+    <EntitySet Name="Pedido" EntityType="Self.Pedido" />
     <EntitySet Name="Producto" EntityType="Self.Producto" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
   </EntityContainer>
 </Schema>

@@ -14,11 +14,7 @@ namespace TienditaAPI.Models
     
     public partial class Carrito
     {
-        public string Correo { get; set; }
-        public int IdProducto { get; set; }
-        public int Cantidad { get; set; }
-        public double Costo { get; set; }
-        public bool Estado { get; set; }
         public int IdCarrito { get; set; }
+        public string Correo { get; set; }
     }
 }

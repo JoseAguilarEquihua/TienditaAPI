@@ -12,12 +12,12 @@ namespace TienditaAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pedidos
+    public partial class DetallePedido
     {
-        public int IdProducto { get; set; }
-        public string Correo { get; set; }
-        public int Cantidad { get; set; }
-        public double Total { get; set; }
+        public int Id { get; set; }
         public int IdPedido { get; set; }
+        public int IdProducto { get; set; }
+        public int Cantidad { get; set; }
+        public string Detalle { get; set; }
     }
 }
