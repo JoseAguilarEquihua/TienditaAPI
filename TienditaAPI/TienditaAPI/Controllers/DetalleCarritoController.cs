@@ -26,13 +26,14 @@ namespace TienditaAPI.Controllers
         [ResponseType(typeof(DetalleCarrito))]
         public IHttpActionResult GetDetalleCarrito(int id)
         {
-            DetalleCarrito detalleCarrito = db.DetalleCarrito.Find(id);
-            if (detalleCarrito == null)
+            List<DetalleCarrito> detalles = db.DetalleCarrito.Where(d => d.IdCarrito == id).ToList();
+            //List<DetalleCarrito> detalleCarrito = db.DetalleCarrito.Where(c => c.IdCarrito == id); 
+            if (detalles == null)
             {
                 return NotFound();
             }
 
-            return Ok(detalleCarrito);
+            return Ok(detalles);
         }
 
         // PUT: api/DetalleCarrito/5
@@ -79,10 +80,21 @@ namespace TienditaAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.DetalleCarrito.Add(detalleCarrito);
-            db.SaveChanges();
+            if(!ProductExists(detalleCarrito.IdProducto, detalleCarrito.IdCarrito)){
+                db.DetalleCarrito.Add(detalleCarrito);
+                db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = detalleCarrito.Id }, detalleCarrito);
+            } else
+            {
+                detalleCarrito = db.DetalleCarrito.SingleOrDefault(e => e.IdProducto == detalleCarrito.IdProducto && e.IdCarrito == detalleCarrito.IdCarrito);
+                return Ok(detalleCarrito);
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = detalleCarrito.Id }, detalleCarrito);
+            
+
+
+
+            
         }
 
         // DELETE: api/DetalleCarrito/5
@@ -113,6 +125,11 @@ namespace TienditaAPI.Controllers
         private bool DetalleCarritoExists(int id)
         {
             return db.DetalleCarrito.Count(e => e.Id == id) > 0;
+        }
+
+        private bool ProductExists(int IdProducto, int IdCarrito)
+        {
+            return db.DetalleCarrito.Count(e => e.IdProducto == IdProducto && e.IdCarrito == IdCarrito) > 0;
         }
     }
 }

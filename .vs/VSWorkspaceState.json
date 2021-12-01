@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TienditaAPI",
+    "\\TienditaAPI\\TienditaAPI",
+    "\\TienditaAPI\\TienditaAPI\\Models"
   ],
-  "SelectedNode": "\\TienditaAPI.sln",
+  "SelectedNode": "\\TienditaAPI\\TienditaAPI\\Models\\BDModel.edmx",
   "PreviewInSolutionExplorer": false
 }
