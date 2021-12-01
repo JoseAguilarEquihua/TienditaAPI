@@ -79,10 +79,17 @@ namespace TienditaAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Carrito.Add(carrito);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = carrito.IdCarrito }, carrito);
+            if (!UsuarioHasCarrito(carrito.Correo))
+            {
+                db.Carrito.Add(carrito);
+                db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = carrito.IdCarrito }, carrito);
+            }
+            else
+            {
+                carrito = db.Carrito.SingleOrDefault(c  => c.Correo == carrito.Correo);
+                return Ok(carrito);
+            }
         }
 
         // DELETE: api/Carrito/5
@@ -113,6 +120,11 @@ namespace TienditaAPI.Controllers
         private bool CarritoExists(int id)
         {
             return db.Carrito.Count(e => e.IdCarrito == id) > 0;
+        }
+
+        private bool UsuarioHasCarrito(string correo)
+        {
+            return db.Carrito.Count(e => e.Correo == correo) > 0;
         }
     }
 }
