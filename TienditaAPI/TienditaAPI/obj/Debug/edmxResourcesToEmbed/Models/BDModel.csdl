@@ -27,14 +27,6 @@
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="Detalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Pedido">
-    <Key>
-      <PropertyRef Name="IdPedido" />
-    </Key>
-    <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Total" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityType Name="Producto">
     <Key>
       <PropertyRef Name="IdProducto" />
@@ -59,8 +51,16 @@
     <EntitySet Name="Carrito" EntityType="Self.Carrito" />
     <EntitySet Name="DetalleCarrito" EntityType="Self.DetalleCarrito" />
     <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
-    <EntitySet Name="Pedido" EntityType="Self.Pedido" />
     <EntitySet Name="Producto" EntityType="Self.Producto" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="Pedido" EntityType="TienditaModel.Pedido" />
   </EntityContainer>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="IdPedido" />
+    </Key>
+    <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+  </EntityType>
 </Schema>

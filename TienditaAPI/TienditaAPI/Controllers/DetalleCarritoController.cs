@@ -36,15 +36,50 @@ namespace TienditaAPI.Controllers
             return Ok(detalles);
         }
 
-        // PUT: api/DetalleCarrito/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDetalleCarrito(int id, DetalleCarrito detalleCarrito)
+        //[System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/DetalleCarrito/GetCarrito/{id}")]
+        [ResponseType(typeof(DetalleCarritoProductoModel))]
+        public IHttpActionResult GetDetalleCarritoProducto(int id)
         {
-            if (!ModelState.IsValid)
+            //DetalleCarritoProductoModel detalleCarritoProductoModel = new DetalleCarritoProductoModel();            
+            List<DetalleCarritoProductoModel> detalles = db.DetalleCarrito.Join(db.Producto, det => det.IdProducto, prod => prod.IdProducto,
+                (det, prod) => new DetalleCarritoProductoModel
+                {
+                    Producto = prod.Producto1,
+                    Cantidad = det.Cantidad,
+                    Costo = prod.Costo,
+                    Detalle = det.Detalle,
+                    IdCarrito = det.IdCarrito,
+                    Id = det.Id
+                }).Where(det => det.IdCarrito == id).ToList();
+            
+            if (detalles == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
+            return Ok(detalles);
+        }
+
+        // PUT: api/DetalleCarrito/5
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/DetalleCarrito/ModifyDetalleCarrito/{id}/{accion}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult ModifyDetalleCarrito(int id, bool accion)
+        {
+            DetalleCarrito detalleCarrito = new DetalleCarrito();
+            detalleCarrito = db.DetalleCarrito.Find(id);
+            if(accion == true)
+            {
+                detalleCarrito.Cantidad += 1;
+            } else
+            {
+                if (detalleCarrito.Cantidad > 1)
+                {
+                    detalleCarrito.Cantidad -= 1;
+                }                
+            }
+            
             if (id != detalleCarrito.Id)
             {
                 return BadRequest();
@@ -64,11 +99,11 @@ namespace TienditaAPI.Controllers
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(HttpStatusCode.BadRequest);
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST: api/DetalleCarrito
@@ -89,12 +124,7 @@ namespace TienditaAPI.Controllers
                 detalleCarrito = db.DetalleCarrito.SingleOrDefault(e => e.IdProducto == detalleCarrito.IdProducto && e.IdCarrito == detalleCarrito.IdCarrito);
                 return Ok(detalleCarrito);
             }
-
-            
-
-
-
-            
+       
         }
 
         // DELETE: api/DetalleCarrito/5
@@ -111,6 +141,25 @@ namespace TienditaAPI.Controllers
             db.SaveChanges();
 
             return Ok(detalleCarrito);
+        }
+
+        
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/DetalleCarrito/DeleteDetalleCarrito/{id}")]        
+
+        [ResponseType(typeof(DetalleCarrito))]
+        public IHttpActionResult DeleteDetalleCarritoPedido(int id)
+        {
+            DetalleCarrito detalleCarrito = db.DetalleCarrito.FirstOrDefault(e => e.IdCarrito == id);
+            if (detalleCarrito == null)
+            {
+                return NotFound();
+            }
+
+            db.DetalleCarrito.RemoveRange(db.DetalleCarrito.Where(d => d.IdCarrito == id));
+            db.SaveChanges();
+
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

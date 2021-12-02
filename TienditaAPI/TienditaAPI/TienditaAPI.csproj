@@ -156,6 +156,7 @@
     <Compile Include="Models\DetalleCarrito.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleCarritoProductoModel.cs" />
     <Compile Include="Models\DetallePedido.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>

@@ -8,9 +8,9 @@
         <EntityTypeShape EntityType="TienditaModel.Carrito" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TienditaModel.DetalleCarrito" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TienditaModel.DetallePedido" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TienditaModel.Pedido" Width="1.5" PointX="2.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TienditaModel.Producto" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TienditaModel.Usuario" Width="1.5" PointX="4.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TienditaModel.Pedido" Width="1.5" PointX="2.75" PointY="3.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

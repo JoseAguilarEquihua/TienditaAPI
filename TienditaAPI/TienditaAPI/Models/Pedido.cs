@@ -16,6 +16,6 @@ namespace TienditaAPI.Models
     {
         public int IdPedido { get; set; }
         public string Correo { get; set; }
-        public string Total { get; set; }
+        public decimal Total { get; set; }
     }
 }

@@ -3,8 +3,8 @@
     "",
     "\\TienditaAPI",
     "\\TienditaAPI\\TienditaAPI",
-    "\\TienditaAPI\\TienditaAPI\\Models"
+    "\\TienditaAPI\\TienditaAPI\\Controllers"
   ],
-  "SelectedNode": "\\TienditaAPI\\TienditaAPI\\Models\\BDModel.edmx",
+  "SelectedNode": "\\TienditaAPI\\TienditaAPI\\Controllers\\CarritoController.cs",
   "PreviewInSolutionExplorer": false
 }

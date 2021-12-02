@@ -33,7 +33,7 @@
     </Key>
     <Property Name="IdPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Total" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>

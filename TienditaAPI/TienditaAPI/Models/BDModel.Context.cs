@@ -28,8 +28,8 @@ namespace TienditaAPI.Models
         public virtual DbSet<Carrito> Carrito { get; set; }
         public virtual DbSet<DetalleCarrito> DetalleCarrito { get; set; }
         public virtual DbSet<DetallePedido> DetallePedido { get; set; }
-        public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Pedido> Pedido { get; set; }
     }
 }
