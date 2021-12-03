@@ -16,6 +16,7 @@ namespace TienditaAPI.Controllers
     {
         private TienditaEntities1 db = new TienditaEntities1();
 
+        [Authorize]
         // GET: api/Usuario
         public IQueryable<Usuario> GetUsuario()
         {
@@ -24,15 +25,18 @@ namespace TienditaAPI.Controllers
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/Usuarios/Login")]
-        [ResponseType(typeof(Usuario))]
+        [ResponseType(typeof(SesionModel))]
         public IHttpActionResult Login(AuthModel login)
         {
+            SesionModel sesion = new SesionModel();
             bool usuario = UsuarioLogin(login.Correo, login.Contrasenia);
             if (usuario)
             {
-                Usuario usuarioResponse = db.Usuario.Find(login.Correo);
-
-                return Ok(usuarioResponse);
+                var tokenService = new Services.JWTService();
+                sesion.Token = tokenService.GenerateJWT(login.Correo);
+                sesion.usuario = db.Usuario.Find(login.Correo);
+                
+                return Ok(sesion);
             }
             else
             {
@@ -41,6 +45,7 @@ namespace TienditaAPI.Controllers
 
         }
 
+        [Authorize]
         // GET: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetUsuario(string id)
@@ -54,6 +59,7 @@ namespace TienditaAPI.Controllers
             return Ok(usuario);
         }
 
+        [Authorize]
         // PUT: api/Usuario/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuario(string id, Usuario usuario)
@@ -119,6 +125,7 @@ namespace TienditaAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = usuario.Correo }, usuario);
         }
 
+        [Authorize]
         // DELETE: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult DeleteUsuario(string id)

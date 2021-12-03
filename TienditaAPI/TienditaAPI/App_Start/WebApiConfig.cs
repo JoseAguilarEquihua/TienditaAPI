@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using TienditaAPI.Services;
 
 namespace TienditaAPI
 {
@@ -14,10 +15,11 @@ namespace TienditaAPI
             // Rutas de API web
             config.MapHttpAttributeRoutes();
 
+            config.MessageHandlers.Add(new TokenValidationHandler());
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}/{password}",
-                defaults: new { id = RouteParameter.Optional, password = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
 
             //Evito las referencias circulares al trabajar con Entity FrameWork         

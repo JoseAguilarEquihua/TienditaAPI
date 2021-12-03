@@ -12,6 +12,7 @@ using TienditaAPI.Models;
 
 namespace TienditaAPI.Controllers
 {
+    [Authorize]
     public class PedidoController : ApiController
     {
         private TienditaEntities1 db = new TienditaEntities1();

@@ -370,3 +370,11 @@ C:\Users\Ale\Documents\Desarrollo Movil Integral\Segundo Parcial\TienditaAPI\Tie
 C:\Users\Ale\Documents\Desarrollo Movil Integral\Segundo Parcial\TienditaAPI\TienditaAPI\TienditaAPI\obj\Debug\TienditaAPI.csproj.CopyComplete
 C:\Users\Ale\Documents\Desarrollo Movil Integral\Segundo Parcial\TienditaAPI\TienditaAPI\TienditaAPI\obj\Debug\TienditaAPI.dll
 C:\Users\Ale\Documents\Desarrollo Movil Integral\Segundo Parcial\TienditaAPI\TienditaAPI\TienditaAPI\obj\Debug\TienditaAPI.pdb
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.Logging.dll
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.Tokens.dll
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.Logging.xml
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\Microsoft.IdentityModel.Tokens.xml
+D:\Documentos\VisualStudioProjects\DMI\Segundo parcial\Github\TienditaAPI\TienditaAPI\TienditaAPI\bin\System.IdentityModel.Tokens.Jwt.xml

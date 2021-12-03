@@ -15,8 +15,8 @@ namespace TienditaAPI
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}/{password}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, password = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional}
             );
         }
     }
