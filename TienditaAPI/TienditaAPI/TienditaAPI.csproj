@@ -160,9 +160,11 @@
     <Compile Include="Models\DetallePedido.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetallePedidoUsuarioModel.cs" />
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PedidoUsuarioModel.cs" />
     <Compile Include="Models\Producto.cs">
       <DependentUpon>BDModel.tt</DependentUpon>
     </Compile>

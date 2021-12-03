@@ -26,7 +26,7 @@ namespace TienditaAPI.Controllers
         [ResponseType(typeof(DetallePedido))]
         public IHttpActionResult GetDetallePedido(int id)
         {
-            DetallePedido detallePedido = db.DetallePedido.Find(id);
+            List<DetallePedido> detallePedido = db.DetallePedido.Where(d => d.IdPedido == id).ToList();
             if (detallePedido == null)
             {
                 return NotFound();
@@ -34,7 +34,7 @@ namespace TienditaAPI.Controllers
 
             return Ok(detallePedido);
         }
-
+     
         // PUT: api/DetallePedido/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDetallePedido(int id, DetallePedido detallePedido)
@@ -66,7 +66,6 @@ namespace TienditaAPI.Controllers
                     throw;
                 }
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
 

@@ -57,7 +57,6 @@ namespace TienditaAPI.Controllers
             {
                 return NotFound();
             }
-
             return Ok(detalles);
         }
 

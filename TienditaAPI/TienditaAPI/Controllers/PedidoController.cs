@@ -18,9 +18,76 @@ namespace TienditaAPI.Controllers
 
         // GET: api/Pedido
         public IQueryable<Pedido> GetPedido()
-        {
+        {                        
             return db.Pedido;
         }
+
+        [System.Web.Http.Route("api/PedidoController/GetPedidosProducto")]
+        [ResponseType(typeof(PedidoUsuarioModel))]
+        public IHttpActionResult GetPedidosProducto()
+        {                       
+            List<PedidoUsuarioModel> pedidosProducto = db.Pedido.Join(db.Usuario, ped => ped.Correo, usr => usr.Correo,
+                (ped, usr) => new PedidoUsuarioModel
+                {
+                    IdPedido = ped.IdPedido,
+                    Nombre = usr.Nombre,
+                    Apellidos = usr.Apellidos,
+                    Telefono = usr.Telefono,
+                    Total = (double) ped.Total
+
+                }).ToList();
+
+            if (pedidosProducto == null)
+            {
+                return NotFound();
+            }
+            return Ok(pedidosProducto);
+        }
+
+        [System.Web.Http.Route("api/PedidoController/GetPedidosProducto/{id}")]
+        [ResponseType(typeof(PedidoUsuarioModel))]
+        public IHttpActionResult GetPedidosProductoUsuario(int id)
+        {
+            PedidoUsuarioModel pedidoUsuario = db.Pedido.Join(db.Usuario, ped => ped.Correo, usr => usr.Correo,
+                (ped, usr) => new PedidoUsuarioModel
+                {
+                    IdPedido = ped.IdPedido,
+                    Nombre = usr.Nombre,
+                    Apellidos = usr.Apellidos,
+                    Telefono = usr.Telefono,
+                    Total = (double)ped.Total
+
+                }).FirstOrDefault(det => det.IdPedido == id);
+
+            if (pedidoUsuario == null)
+            {
+                return NotFound();
+            }
+            return Ok(pedidoUsuario);
+        }
+
+        [System.Web.Http.Route("api/PedidoController/GetDetallePedido/{id}")]
+        [ResponseType(typeof(DetallePedidoUsuarioModel))]
+        public IHttpActionResult GetDetallePedido(int id)
+        {
+            List<DetallePedidoUsuarioModel> detallePedidoUsuario = db.DetallePedido.Join(db.Producto, det => det.IdProducto, prod=> prod.IdProducto,
+                (det, prod) => new DetallePedidoUsuarioModel
+                {
+                    IdPedido = det.IdPedido,
+                    Producto = prod.Producto1,
+                    Cantidad = det.Cantidad,
+                    Costo = prod.Costo,
+                    Detalle = det.Detalle,
+                    Subtotal = prod.Costo * det.Cantidad
+                }).Where(det => det.IdPedido == id).ToList();
+
+            if (detallePedidoUsuario == null)
+            {
+                return NotFound();
+            }
+            return Ok(detallePedidoUsuario);
+        }
+        
 
         // GET: api/Pedido/5
         [ResponseType(typeof(Pedido))]

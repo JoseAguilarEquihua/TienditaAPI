@@ -5,6 +5,6 @@
     "\\TienditaAPI\\TienditaAPI",
     "\\TienditaAPI\\TienditaAPI\\Controllers"
   ],
-  "SelectedNode": "\\TienditaAPI\\TienditaAPI\\Controllers\\CarritoController.cs",
+  "SelectedNode": "\\TienditaAPI\\TienditaAPI\\Controllers\\DetalleCarritoController.cs",
   "PreviewInSolutionExplorer": false
 }
